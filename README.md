@@ -1,24 +1,51 @@
-# README
+##usersテーブル
+|Column          |Type    | Options     |
+|----------------|--------|-------------|
+|nickname        |  string| null:false  |
+|password        |  string| null:false  |
+|birth           |  date  | null:false  |
+|e-mail          |string  |null:false   |
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+#Association
+has_many :dreams
+has_many :comments
+has_many :likes
 
-Things you may want to cover:
 
-* Ruby version
+##dreamsテーブル
+|Column                                | Type     |Options                      |
+|--------------------------------------|----------|-----------------------------|
+|user                                  |references|null:false,foreign_key:true  |
+|name                                  |string    |null:false                   |
+|text                                  |text      |null:false                   |
+| category_id(active_hash)             | integer  | null: false                 |
 
-* System dependencies
+#Association
+belongs_to :user
+has_many: comments 
+has_many :likes
 
-* Configuration
 
-* Database creation
 
-* Database initialization
+##commentsテーブル
+|Column        | Type      |Options                    |
+|--------------|-----------|---------------------------|
+|user          |references |null:false,foreign_key:true|
+|item          |references |null:false,foreign_key:true|
+|text          |text       |null:false                 |
 
-* How to run the test suite
+#Association
+belongs_to:user 
+belongs_to:dream 
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
 
-* ...
+#likesテーブル
+|Columns   |Type      |Options                    |
+|----------|----------|---------------------------|
+|user      |references|null:false,foreign_key:true|
+|dream     |references|null:false,foreign_key:true|
+
+##Association
+belongs_to :user
+belongs_to :dream
